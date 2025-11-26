@@ -50,6 +50,4 @@ jobs:
         run: |
           gh release create ${{ steps.version.outputs.TAG }} \
             --title "Release ${{ steps.version.outputs.VERSION }}" \
-            --notes "Version ${{ steps.version.outputs.VERSION }}
-            
-Docker Image: ghcr.io/${{ github.repository }}:${{ steps.version.outputs.TAG }}"
+            --notes "Version ${{ steps.version.outputs.VERSION }} - Docker: ghcr.io/${{ github.repository }}:${{ steps.version.outputs.TAG }}"
