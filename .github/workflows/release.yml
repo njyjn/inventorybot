@@ -45,15 +45,11 @@ jobs:
 
       - name: Create Release
         if: steps.check_tag.outputs.TAG_EXISTS == 'false'
-        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.version.outputs.TAG }}
-          release_name: Release ${{ steps.version.outputs.VERSION }}
-          body: |
-            Version ${{ steps.version.outputs.VERSION }}
+        run: |
+          gh release create ${{ steps.version.outputs.TAG }} \
+            --title "Release ${{ steps.version.outputs.VERSION }}" \
+            --notes "Version ${{ steps.version.outputs.VERSION }}
             
-            Docker Image: `ghcr.io/${{ github.repository }}:${{ steps.version.outputs.TAG }}`
-          draft: false
-          prerelease: false
+Docker Image: ghcr.io/${{ github.repository }}:${{ steps.version.outputs.TAG }}"
