@@ -1,0 +1,19 @@
+name: "InventoryBot"
+version: "1.0.13"
+slug: "inventorybot"
+description: "Barcode scanner inventory management system"
+startup: services
+boot: auto
+host_network: true
+ingress: false
+map:
+  - type: share
+    read_only: false
+options:
+  database_url: ""
+  port: 3001
+schema:
+  database_url: "str"
+  port: "port"
+arch:
+  - aarch64

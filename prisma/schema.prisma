@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model ItemType {
+  id    Int     @id @default(autoincrement())
+  name  String  @unique
+  items Item[]
+  createdAt DateTime @default(now())
+
+  @@map("item_types")
+}
+
+model Location {
+  id       Int     @id @default(autoincrement())
+  name     String  @unique
+  parentId Int?
+  parent   Location?  @relation("LocationToParent", fields: [parentId], references: [id])
+  children Location[] @relation("LocationToParent")
+  items    Item[]
+  createdAt DateTime @default(now())
+
+  @@map("locations")
+}
+
+model Item {
+  id                Int     @id @default(autoincrement())
+  itemTypeId        Int?
+  itemType          ItemType? @relation(fields: [itemTypeId], references: [id])
+  name              String
+  unit              String  @default("each")
+  quantityPerUnit   Float   @default(1)
+  locationId        Int?
+  location          Location? @relation(fields: [locationId], references: [id])
+  notes             String?
+  barcode           String? @unique
+  active            Boolean @default(true)
+  transactions      Transaction[]
+  createdAt         DateTime @default(now())
+
+  @@map("items")
+}
+
+model Transaction {
+  id        Int     @id @default(autoincrement())
+  itemId    Int
+  item      Item    @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  kind      String
+  quantity  Int
+  delta     Int
+  reference String?
+  note      String?
+  createdBy String?
+  createdAt DateTime @default(now())
+
+  @@index([itemId])
+  @@index([createdAt])
+  @@map("transactions")
+}
