@@ -1,5 +1,5 @@
 name: "InventoryBot"
-version: "1.1.4"
+version: "1.1.5"
 slug: "inventorybot"
 description: "Barcode scanner inventory management system"
 image: ghcr.io/njyjn/inventorybot
