@@ -5,7 +5,7 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Install CA certificates, jq, and build dependencies for sqlite3
-RUN apk add --no-cache ca-certificates jq python3 make g++ gcc
+RUN apk add --no-cache ca-certificates jq python3 python3-dev make g++ gcc
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
