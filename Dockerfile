@@ -4,8 +4,8 @@ FROM node:18-alpine
 # Set the working directory
 WORKDIR /app
 
-# Install CA certificates and jq for parsing JSON
-RUN apk add --no-cache ca-certificates jq
+# Install CA certificates, jq, and build dependencies for sqlite3
+RUN apk add --no-cache ca-certificates jq python3 make g++ gcc
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
