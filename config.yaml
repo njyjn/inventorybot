@@ -1,7 +1,8 @@
 name: "InventoryBot"
-version: "1.1.3"
+version: "1.1.4"
 slug: "inventorybot"
 description: "Barcode scanner inventory management system"
+image: ghcr.io/njyjn/inventorybot
 startup: services
 boot: auto
 host_network: true
