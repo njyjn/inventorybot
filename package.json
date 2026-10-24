@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "20.19.25",
+    "@types/node": "^24",
     "@types/react": "18.3.27",
     "@types/react-dom": "^18",
     "@types/sql.js": "^1.4.9",
